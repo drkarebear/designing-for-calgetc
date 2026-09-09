@@ -1,7 +1,13 @@
 document.addEventListener('DOMContentLoaded', () => {
-  document.querySelectorAll('[data-area-jump]').forEach(select => {
-    select.addEventListener('change', () => {
-      if (select.value) window.location.href = select.value;
+  document.querySelectorAll('[data-area-jump-go]').forEach(button => {
+    button.addEventListener('click', () => {
+      const container = button.closest('.hero-area-jump, .area-jump-inner') || button.parentElement;
+      const select = container?.querySelector('[data-area-jump]');
+      if (select?.value) {
+        window.location.href = select.value;
+      } else {
+        select?.focus();
+      }
     });
   });
 
@@ -139,66 +145,139 @@ document.addEventListener('DOMContentLoaded', () => {
   const areaItems = checklist.querySelector('[data-area-check-items]');
   const areaHeading = checklist.querySelector('[data-area-check-heading]');
   const areaGuideLink = checklist.querySelector('[data-area-guide-link]');
+  const areaGuideLinkBottom = checklist.querySelector('[data-area-guide-link-bottom]');
+  const workspace = checklist.querySelector('[data-checker-workspace]');
+  const nextPanel = checklist.querySelector('[data-checker-next]');
   const fill = checklist.querySelector('[data-progress-fill]');
   const text = checklist.querySelector('[data-progress-text]');
   const reset = checklist.querySelector('[data-reset-checklist]');
   const printButton = checklist.querySelector('[data-print-checklist]');
+  const checkSections = () => [...checklist.querySelectorAll('[data-check-section]')];
 
-  const getBoxes = () => [...checklist.querySelectorAll('input[type="checkbox"]')];
+  const getScoredBoxes = () =>
+    [...checklist.querySelectorAll('input[type="checkbox"]:not([data-optional-check])')];
+
+  const getAllBoxes = () => [...checklist.querySelectorAll('input[type="checkbox"]')];
+
   const update = () => {
-    const boxes = getBoxes();
+    const boxes = getScoredBoxes();
     const checked = boxes.filter(b => b.checked).length;
     const pct = boxes.length ? Math.round((checked / boxes.length) * 100) : 0;
     if (fill) fill.style.width = pct + '%';
-    if (text) text.textContent = `${checked} of ${boxes.length} review points checked (${pct}%)`;
+    if (text) text.textContent = `${checked} of ${boxes.length} core review points checked`;
   };
 
-  const bindBoxes = () => getBoxes().forEach(b => b.addEventListener('change', update));
+  const bindBoxes = () => getAllBoxes().forEach(b => {
+    if (!b.dataset.bound) {
+      b.addEventListener('change', update);
+      b.dataset.bound = 'true';
+    }
+  });
+
+  const setWorkspaceVisible = (visible) => {
+    if (workspace) workspace.hidden = !visible;
+    if (nextPanel) nextPanel.hidden = !visible;
+    checkSections().forEach(section => {
+      // Area-specific group remains controlled below after content is rendered.
+      if (!section.hasAttribute('data-area-checks')) section.hidden = !visible;
+    });
+  };
 
   const renderArea = (key, updateUrl = true) => {
     const data = areaData[key];
-    areaItems.innerHTML = '';
+    if (areaItems) areaItems.replaceChildren();
+
     if (!data) {
-      areaGroup.hidden = true;
-      panel.innerHTML = `<div><span class="source-pill standard">Area-specific standard</span><h2>Choose a Cal-GETC area to add the discipline-level checks.</h2><p>The general checklist is useful for every proposal. Selecting an area adds the requirements reviewers need to see for that subject area.</p></div>`;
+      if (areaGroup) areaGroup.hidden = true;
+      if (panel) {
+        panel.hidden = true;
+        panel.replaceChildren();
+      }
+      setWorkspaceVisible(false);
       if (updateUrl) history.replaceState(null, '', location.pathname);
       update();
       return;
     }
 
-    panel.innerHTML = `<div><span class="source-pill standard">${data.section}</span><h2>${data.title}</h2><p>${data.intro}</p><a href="${data.page}">Read the full area guide →</a></div>`;
-    areaHeading.textContent = `5. ${data.title} requirements`;
-    areaGuideLink.href = data.page;
-    data.checks.forEach((label, i) => {
-      const id = `area-check-${key}-${i+1}`;
+    if (panel) {
+      panel.hidden = false;
+      panel.replaceChildren();
+
+      const wrapper = document.createElement('div');
+      const pill = document.createElement('span');
+      pill.className = 'source-pill standard';
+      pill.textContent = data.section;
+
+      const heading = document.createElement('h2');
+      heading.textContent = data.title;
+
+      const intro = document.createElement('p');
+      intro.textContent = data.intro;
+
+      const guide = document.createElement('a');
+      guide.href = data.page;
+      guide.textContent = 'Read the full area guide →';
+
+      wrapper.append(pill, heading, intro, guide);
+      panel.append(wrapper);
+    }
+
+    if (areaHeading) areaHeading.textContent = `3. ${data.title} requirements`;
+    if (areaGuideLink) areaGuideLink.href = data.page;
+    if (areaGuideLinkBottom) areaGuideLinkBottom.href = data.page;
+
+    data.checks.forEach((checkText, i) => {
+      const id = `area-check-${key}-${i + 1}`;
       const item = document.createElement('div');
       item.className = 'check-item';
-      item.innerHTML = `<input id="${id}" type="checkbox"><label for="${id}"><strong>${label}</strong><small>${data.section}</small></label>`;
-      areaItems.appendChild(item);
+
+      const input = document.createElement('input');
+      input.id = id;
+      input.type = 'checkbox';
+
+      const label = document.createElement('label');
+      label.htmlFor = id;
+
+      const strong = document.createElement('strong');
+      strong.textContent = checkText;
+
+      const small = document.createElement('small');
+      small.textContent = data.section;
+
+      label.append(strong, small);
+      item.append(input, label);
+      areaItems?.append(item);
     });
-    areaGroup.hidden = false;
+
+    setWorkspaceVisible(true);
+    if (areaGroup) areaGroup.hidden = false;
     bindBoxes();
     update();
-    if (updateUrl) history.replaceState(null, '', `${location.pathname}?area=${encodeURIComponent(key)}`);
+
+    if (updateUrl) {
+      history.replaceState(null, '', `${location.pathname}#area=${encodeURIComponent(key)}`);
+    }
   };
 
   checkerArea?.addEventListener('change', () => renderArea(checkerArea.value));
 
   reset?.addEventListener('click', () => {
-    getBoxes().forEach(b => b.checked = false);
+    getAllBoxes().forEach(b => b.checked = false);
     update();
-    getBoxes()[0]?.focus();
+    const firstVisible = getAllBoxes().find(b => !b.closest('[hidden]'));
+    firstVisible?.focus();
   });
 
   printButton?.addEventListener('click', () => window.print());
 
   bindBoxes();
-  const params = new URLSearchParams(location.search);
-  const initialArea = params.get('area');
+  const hashMatch = location.hash.match(/^#area=([a-z0-9]+)$/i);
+  const initialArea = hashMatch ? hashMatch[1].toLowerCase() : null;
   if (initialArea && areaData[initialArea]) {
     checkerArea.value = initialArea;
     renderArea(initialArea, false);
   } else {
+    setWorkspaceVisible(false);
     update();
   }
 });
