@@ -28,7 +28,7 @@ The uploaded packet includes the **Guiding Notes Summary of Changes**, not the c
 - Kept reviewer claims limited to what is supported by the uploaded Guiding Notes Summary of Changes; the full current Guiding Notes should still be added before deeper reviewer-specific area advice.
 
 
-## V13 changes
+## V14 changes
 - Expanded Area 1A with a clear Cal-GETC vs. ENGL C1000 companion comparison.
 - Added a faculty-facing formal / context-dependent / informal writing discussion framework for C1000.
 - Added a caution explaining that Area 1B explicitly permits process/peer/informal writing in its 5,000-word total while Area 1A does not state the same rule.
@@ -37,14 +37,14 @@ The uploaded packet includes the **Guiding Notes Summary of Changes**, not the c
 - Added Print / Save PDF support without uploading or storing faculty data.
 
 
-## V13 naming and scope refinement
+## V14 naming and scope refinement
 - Renamed the primary checker from **Check My COR** to **Check My Cal-GETC Area**.
 - Primary URL is now `check-my-area.html`.
 - `check-my-cor.html` remains as a compatibility redirect.
 - Clarified that the checker is a Cal-GETC readiness/gap-finding tool, not a complete Title 5 or local curriculum compliance audit.
 
 
-## V13 faculty-usability pass
+## V14 faculty-usability pass
 - Added a homepage "Already know your area?" jump menu.
 - Tightened homepage copy while retaining the task-based entry points.
 - Changed the checker to an area-first flow: no long checklist appears until faculty choose an area.
@@ -55,7 +55,7 @@ The uploaded packet includes the **Guiding Notes Summary of Changes**, not the c
 - Added clearer next steps back to the area guide and Approval & ASSIST.
 
 
-## V13 area hierarchy
+## V14 area hierarchy
 - Added grouped overview pages for Area 1, Area 3, and Area 5.
 - Rebuilt Areas & Standards around the six numbered Cal-GETC areas rather than presenting all subareas as equal-level choices.
 - Added explicit subarea relationships and sequencing/combination notes.
@@ -64,7 +64,7 @@ The uploaded packet includes the **Guiding Notes Summary of Changes**, not the c
 - Updated area jump menus to include the grouped overview pages.
 
 
-## V13 accessibility and independence pass
+## V14 accessibility and independence pass
 - Performed a sitewide WCAG 2.2 Level AA-oriented source review.
 - Repaired semantic heading structure in the area guidance boxes.
 - Added captions and column-header scope to COR evidence tables.
@@ -79,7 +79,7 @@ The uploaded packet includes the **Guiding Notes Summary of Changes**, not the c
 - Added `ACCESSIBILITY-AUDIT.md` documenting the review and remaining manual-testing recommendations.
 
 
-## V13 cognitive-accessibility pass
+## V14 cognitive-accessibility pass
 - Simplified the homepage and made the eligibility pre-check optional via progressive disclosure.
 - Replaced ambiguous code-only subarea buttons with full subarea names.
 - Added narrow-layout “On this page” navigation to every detailed area guide.
@@ -88,7 +88,7 @@ The uploaded packet includes the **Guiding Notes Summary of Changes**, not the c
 - Improved very narrow-layout heading sizing and maintained 44px-oriented touch targets.
 
 
-## V13 privacy and security hardening
+## V14 privacy and security hardening
 - Restrictive Content Security Policy on every HTML page.
 - `no-referrer` policy plus `noreferrer` on external links.
 - Checker preselection moved from query strings to URL fragments.
@@ -101,7 +101,7 @@ The uploaded packet includes the **Guiding Notes Summary of Changes**, not the c
 - Redirect stubs marked `noindex,follow`.
 
 
-## V13 navigation icon refinement
+## V14 navigation icon refinement
 - Replaced abstract sidebar symbols with purposeful emoji wayfinding across the entire site.
 - Home 🏠
 - Areas & Standards 🗺️
@@ -113,7 +113,7 @@ The uploaded packet includes the **Guiding Notes Summary of Changes**, not the c
 - Emoji remain `aria-hidden` because the adjacent text provides the accessible navigation label.
 
 
-## V13 spacing and density pass
+## V14 spacing and density pass
 - Reworked the Areas & Standards subarea links into semantic, full-width link rows.
 - Replaced cramped “Go directly to” inline clusters with “Jump to a subarea” lists.
 - Reworked the Areas directory notice so its explanation and action no longer compete on one line.
@@ -122,3 +122,15 @@ The uploaded packet includes the **Guiding Notes Summary of Changes**, not the c
 - Reorganized the homepage source-key badges into a dedicated wrapping group.
 - Increased spacing in the few remaining multi-button action groups.
 - The semantic list markup remains understandable even if CSS fails to load.
+
+
+## V14 brain-friendly copy pass
+- Audited the site for cognitive load and unnecessary explanation.
+- Shortened repeated reviewer/caveat language across all detailed area pages.
+- Renamed core headings to direct task language: “What the course must show,” “Does this course fit?,” “Show it in the COR,” and “Watch for this.”
+- Reduced repeated sidebar/source wording.
+- Simplified Area 1/3/5 overview pages and removed explanatory sections that repeated the page’s purpose.
+- Put acronym/system explanations behind progressive disclosure on the Design page.
+- Simplified Approval & ASSIST and source descriptions.
+- Reduced redundant Area 1A writing explanations while preserving the Cal-GETC/CCN distinction.
+- Added `PLAIN-LANGUAGE-GUIDE.md` to keep future additions brain-friendly.

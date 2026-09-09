@@ -1241,3 +1241,21 @@ fieldset.check-group { min-inline-size:0; padding:0; }
     grid-template-columns:1fr;
   }
 }
+
+
+/* V14 brain-friendly copy pass */
+.area-main .box-body > p:not(.check-note),
+.note-box p,
+.next-step-panel p,
+.section-heading > p:not(.eyebrow) {
+  max-width: 72ch;
+}
+.acronym-details {
+  max-width: 100%;
+}
+.acronym-details .system-map {
+  margin-top: 4px;
+}
+.assist-terms {
+  margin-bottom: 20px;
+}
