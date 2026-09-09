@@ -3,776 +3,151 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Designing for Cal-GETC</title>
+  <title>Home | Designing for Cal-GETC</title>
   <meta name="description" content="A plain-language guide for California Community College faculty designing and revising courses for Cal-GETC.">
-
-  <style>
-    :root {
-      --navy: #102a56;
-      --purple: #4a277d;
-      --purple-dark: #381d61;
-      --teal: #1e7d79;
-      --gold: #f0b429;
-      --ink: #1f2937;
-      --muted: #5b6472;
-      --line: #d9dee8;
-      --lavender: #f3eef9;
-      --blue-soft: #f4f7fb;
-      --paper: #fffdf8;
-      --green-soft: #dce9e1;
-      --green-mid: #b8cec0;
-      --green-dark: #335f58;
-      --white: #ffffff;
-      --focus: #0b57d0;
-      --shadow: 0 12px 35px rgba(16, 42, 86, 0.08);
-      --radius: 14px;
-      --sidebar: 255px;
-      --max: 1320px;
-    }
-
-    * {
-      box-sizing: border-box;
-    }
-
-    html {
-      scroll-behavior: smooth;
-    }
-
-    @media (prefers-reduced-motion: reduce) {
-      html {
-        scroll-behavior: auto;
-      }
-
-      *, *::before, *::after {
-        transition: none !important;
-        animation: none !important;
-      }
-    }
-
-    body {
-      margin: 0;
-      color: var(--ink);
-      background: var(--white);
-      font-family: Arial, Helvetica, sans-serif;
-      line-height: 1.55;
-    }
-
-    a {
-      color: inherit;
-    }
-
-    a:focus-visible,
-    button:focus-visible {
-      outline: 3px solid var(--focus);
-      outline-offset: 3px;
-    }
-
-    .skip-link {
-      position: absolute;
-      left: 12px;
-      top: -60px;
-      z-index: 1000;
-      padding: 10px 14px;
-      color: #fff;
-      background: var(--navy);
-      border-radius: 8px;
-      text-decoration: none;
-      font-weight: 700;
-    }
-
-    .skip-link:focus {
-      top: 12px;
-    }
-
-    .site-shell {
-      min-height: 100vh;
-      display: grid;
-      grid-template-columns: var(--sidebar) minmax(0, 1fr);
-    }
-
-    .sidebar {
-      position: sticky;
-      top: 0;
-      height: 100vh;
-      padding: 28px 22px 24px;
-      border-right: 1px solid var(--line);
-      background:
-        linear-gradient(180deg, #ffffff 0%, #fbfcfe 55%, #f6f8fb 100%);
-      display: flex;
-      flex-direction: column;
-      gap: 26px;
-      z-index: 20;
-    }
-
-    .brand {
-      color: var(--navy);
-      text-decoration: none;
-      font-family: Georgia, "Times New Roman", serif;
-      font-weight: 700;
-      font-size: 1.65rem;
-      line-height: 1.03;
-      letter-spacing: -0.02em;
-    }
-
-    .side-nav {
-      display: grid;
-      gap: 8px;
-    }
-
-    .side-nav a {
-      display: grid;
-      grid-template-columns: 28px 1fr;
-      align-items: center;
-      gap: 12px;
-      min-height: 48px;
-      padding: 10px 12px;
-      border-radius: 10px;
-      color: var(--navy);
-      text-decoration: none;
-      font-weight: 700;
-    }
-
-    .side-nav a:hover {
-      background: #f7f3fb;
-    }
-
-    .side-nav a[aria-current="page"] {
-      background: var(--lavender);
-      color: var(--purple-dark);
-    }
-
-    .icon {
-      width: 24px;
-      height: 24px;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      color: currentColor;
-    }
-
-    .side-quote {
-      margin-top: auto;
-      padding-top: 22px;
-      border-top: 2px solid #cdd7e5;
-      color: var(--navy);
-      font-family: Georgia, "Times New Roman", serif;
-      font-size: 1.05rem;
-      font-style: italic;
-    }
-
-    .side-quote small {
-      display: block;
-      margin-top: 12px;
-      font-family: Arial, Helvetica, sans-serif;
-      font-size: 0.72rem;
-      font-style: normal;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--muted);
-    }
-
-    .main-column {
-      min-width: 0;
-    }
-
-    .topbar {
-      min-height: 74px;
-      border-bottom: 1px solid #edf0f5;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 24px;
-      padding: 0 42px;
-      background: rgba(255, 255, 255, 0.97);
-      position: sticky;
-      top: 0;
-      z-index: 10;
-    }
-
-    .top-nav {
-      display: flex;
-      flex-wrap: wrap;
-      align-items: center;
-      gap: 28px;
-    }
-
-    .top-nav a {
-      color: var(--navy);
-      text-decoration: none;
-      font-weight: 700;
-      font-size: 0.95rem;
-      padding: 24px 0 20px;
-      border-bottom: 3px solid transparent;
-    }
-
-    .top-nav a:hover,
-    .top-nav a[aria-current="page"] {
-      color: var(--purple);
-      border-bottom-color: var(--purple);
-    }
-
-    .search-link {
-      color: var(--navy);
-      text-decoration: none;
-      font-size: 1.35rem;
-      line-height: 1;
-    }
-
-    main {
-      overflow: hidden;
-    }
-
-    .hero {
-      position: relative;
-      display: grid;
-      grid-template-columns: minmax(0, 1fr) minmax(300px, 420px);
-      gap: 52px;
-      padding: 70px 56px 64px;
-      border-bottom: 1px solid #eef1f5;
-      background:
-        radial-gradient(circle at 70% 18%, rgba(74, 39, 125, 0.05), transparent 28%),
-        linear-gradient(180deg, #ffffff 0%, #fffefe 100%);
-    }
-
-    .eyebrow {
-      margin: 0 0 14px;
-      color: var(--navy);
-      font-size: 0.78rem;
-      font-weight: 800;
-      letter-spacing: 0.22em;
-      text-transform: uppercase;
-    }
-
-    h1, h2, h3 {
-      color: var(--navy);
-      font-family: Georgia, "Times New Roman", serif;
-    }
-
-    h1 {
-      max-width: 760px;
-      margin: 0;
-      font-size: clamp(3.2rem, 6vw, 5.8rem);
-      line-height: 0.98;
-      letter-spacing: -0.045em;
-    }
-
-    .gold-stroke {
-      width: min(340px, 70%);
-      height: 8px;
-      margin: 18px 0 24px;
-      border-radius: 999px;
-      background: var(--gold);
-      transform: rotate(-1deg);
-    }
-
-    .hero-copy {
-      max-width: 760px;
-      margin: 0;
-      color: var(--navy);
-      font-size: 1.28rem;
-      line-height: 1.5;
-    }
-
-    .hero-actions {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 14px;
-      margin-top: 30px;
-    }
-
-    .button {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      min-height: 48px;
-      padding: 12px 20px;
-      border-radius: 9px;
-      text-decoration: none;
-      font-weight: 800;
-      border: 2px solid var(--purple);
-    }
-
-    .button-primary {
-      color: #fff;
-      background: var(--purple);
-    }
-
-    .button-primary:hover {
-      background: var(--purple-dark);
-      border-color: var(--purple-dark);
-    }
-
-    .button-secondary {
-      color: var(--purple);
-      background: #fff;
-    }
-
-    .button-secondary:hover {
-      background: var(--lavender);
-    }
-
-    .editorial-note {
-      align-self: center;
-      min-height: 390px;
-      position: relative;
-      padding: 46px 34px 34px;
-      background:
-        linear-gradient(180deg, rgba(255,255,255,.2), rgba(255,255,255,0)),
-        var(--paper);
-      box-shadow: var(--shadow);
-      clip-path: polygon(
-        1% 4%, 8% 2%, 15% 4%, 22% 1%, 31% 3%, 39% 1%, 48% 3%,
-        57% 1%, 66% 4%, 76% 2%, 87% 4%, 97% 2%, 99% 95%, 89% 97%,
-        79% 95%, 67% 98%, 55% 96%, 44% 98%, 32% 95%, 20% 97%, 8% 95%, 1% 97%
-      );
-    }
-
-    .editorial-note p {
-      margin: 0;
-      color: var(--navy);
-      font-family: "Brush Script MT", "Segoe Script", cursive;
-      font-size: clamp(2.2rem, 4vw, 3.9rem);
-      line-height: 1.05;
-      transform: rotate(-2deg);
-    }
-
-    .editorial-note .note-stroke {
-      width: 150px;
-      height: 7px;
-      margin: 20px 0 0 40px;
-      background: var(--gold);
-      border-radius: 999px;
-      transform: rotate(-7deg);
-    }
-
-    .campus-illustration {
-      position: absolute;
-      inset: auto 0 0;
-      height: 138px;
-      overflow: hidden;
-      background:
-        linear-gradient(150deg, transparent 0 42%, rgba(76, 113, 123, .18) 42.5% 55%, transparent 55.5%),
-        linear-gradient(25deg, rgba(40, 95, 88, .22), rgba(177, 203, 190, .4));
-    }
-
-    .campus-illustration::before,
-    .campus-illustration::after {
-      content: "";
-      position: absolute;
-      bottom: 0;
-      background: var(--green-dark);
-    }
-
-    .campus-illustration::before {
-      left: 58%;
-      width: 46px;
-      height: 114px;
-      clip-path: polygon(45% 0, 55% 0, 68% 16%, 68% 100%, 32% 100%, 32% 16%);
-    }
-
-    .campus-illustration::after {
-      left: 0;
-      right: 0;
-      height: 34px;
-      opacity: .9;
-    }
-
-    .task-section {
-      padding: 50px 56px 66px;
-      max-width: var(--max);
-      margin: 0 auto;
-    }
-
-    .task-section h2 {
-      margin: 0 0 26px;
-      font-size: clamp(2rem, 3vw, 3rem);
-      line-height: 1.1;
-    }
-
-    .task-grid {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 18px;
-    }
-
-    .task-card {
-      position: relative;
-      min-height: 215px;
-      padding: 24px 22px 52px;
-      border: 1px solid var(--line);
-      border-radius: var(--radius);
-      background: #fff;
-      text-decoration: none;
-      box-shadow: 0 4px 18px rgba(16, 42, 86, 0.03);
-    }
-
-    .task-card:hover {
-      border-color: #b9c5d8;
-      box-shadow: var(--shadow);
-      transform: translateY(-2px);
-    }
-
-    .task-card .card-icon {
-      width: 42px;
-      height: 42px;
-      margin-bottom: 18px;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      color: var(--purple);
-      font-size: 1.8rem;
-    }
-
-    .task-card h3 {
-      margin: 0 0 8px;
-      font-family: Arial, Helvetica, sans-serif;
-      font-size: 1.15rem;
-      line-height: 1.2;
-    }
-
-    .task-card p {
-      margin: 0;
-      color: var(--muted);
-    }
-
-    .task-card .arrow {
-      position: absolute;
-      right: 18px;
-      bottom: 16px;
-      width: 34px;
-      height: 34px;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      border-radius: 50%;
-      background: var(--blue-soft);
-      color: var(--navy);
-      font-weight: 900;
-    }
-
-    .landscape-band {
-      position: relative;
-      min-height: 220px;
-      display: grid;
-      grid-template-columns: 1.3fr .7fr;
-      align-items: center;
-      gap: 42px;
-      padding: 48px 56px;
-      overflow: hidden;
-      background:
-        linear-gradient(165deg, transparent 0 52%, rgba(80, 119, 105, .2) 52.5% 67%, transparent 67.5%),
-        linear-gradient(15deg, rgba(50, 95, 88, .28), transparent 60%),
-        var(--green-soft);
-    }
-
-    .landscape-band::after {
-      content: "";
-      position: absolute;
-      left: -3%;
-      right: -3%;
-      bottom: -72px;
-      height: 145px;
-      background: var(--green-dark);
-      clip-path: polygon(0 80%, 9% 54%, 18% 65%, 27% 40%, 38% 61%, 48% 30%, 59% 55%, 70% 22%, 81% 55%, 91% 34%, 100% 56%, 100% 100%, 0 100%);
-      opacity: .96;
-    }
-
-    .landscape-band h2 {
-      position: relative;
-      z-index: 1;
-      margin: 0;
-      font-size: clamp(2rem, 3.5vw, 3.5rem);
-      line-height: 1.02;
-    }
-
-    .landscape-band p {
-      position: relative;
-      z-index: 1;
-      margin: 0;
-      padding-left: 28px;
-      border-left: 2px solid rgba(16, 42, 86, .25);
-      color: var(--navy);
-      font-family: Georgia, "Times New Roman", serif;
-      font-size: 1.3rem;
-    }
-
-    footer {
-      display: grid;
-      grid-template-columns: 1fr auto;
-      align-items: center;
-      gap: 24px;
-      padding: 28px 56px;
-      border-top: 1px solid #e5e7eb;
-      color: var(--navy);
-    }
-
-    .footer-brand {
-      font-family: Georgia, "Times New Roman", serif;
-      font-weight: 700;
-      font-size: 1.2rem;
-    }
-
-    .footer-links {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 22px;
-    }
-
-    .footer-links a {
-      color: var(--navy);
-      text-decoration: none;
-      font-weight: 700;
-    }
-
-    .footer-links a:hover {
-      text-decoration: underline;
-    }
-
-    @media (max-width: 1050px) {
-      .site-shell {
-        grid-template-columns: 1fr;
-      }
-
-      .sidebar {
-        position: static;
-        height: auto;
-        display: block;
-        padding: 18px 22px;
-        border-right: 0;
-        border-bottom: 1px solid var(--line);
-      }
-
-      .brand {
-        display: inline-block;
-      }
-
-      .side-nav,
-      .side-quote {
-        display: none;
-      }
-
-      .topbar {
-        top: 0;
-        padding: 0 22px;
-      }
-
-      .hero {
-        grid-template-columns: 1fr;
-        padding: 52px 28px;
-      }
-
-      .editorial-note {
-        min-height: 290px;
-      }
-
-      .task-section,
-      .landscape-band,
-      footer {
-        padding-left: 28px;
-        padding-right: 28px;
-      }
-    }
-
-    @media (max-width: 760px) {
-      .topbar {
-        position: static;
-        min-height: 0;
-        padding-top: 14px;
-        padding-bottom: 14px;
-      }
-
-      .top-nav {
-        gap: 16px;
-      }
-
-      .top-nav a {
-        padding: 6px 0;
-        font-size: .9rem;
-      }
-
-      .search-link {
-        display: none;
-      }
-
-      .hero {
-        padding-top: 42px;
-      }
-
-      h1 {
-        font-size: clamp(2.8rem, 14vw, 4.5rem);
-      }
-
-      .task-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .landscape-band {
-        grid-template-columns: 1fr;
-      }
-
-      .landscape-band p {
-        padding-left: 0;
-        padding-top: 18px;
-        border-left: 0;
-        border-top: 2px solid rgba(16, 42, 86, .25);
-      }
-
-      footer {
-        grid-template-columns: 1fr;
-      }
-    }
-  </style>
+  <link rel="icon" href="favicon/favicon.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon/favicon-32x32.png">
+  <link rel="apple-touch-icon" href="favicon/apple-touch-icon-180x180.png">
+  <link rel="stylesheet" href="assets/css/site.css">
 </head>
-
 <body>
   <a class="skip-link" href="#main-content">Skip to main content</a>
-
   <div class="site-shell">
     <aside class="sidebar" aria-label="Primary site navigation">
-      <a class="brand" href="#" aria-label="Designing for Cal-GETC home">
-        Designing for<br>Cal-GETC
+      <a class="brand-lockup" href="index.html" aria-label="Designing for Cal-GETC home">
+        <img class="brand-mark" src="favicon/favicon-64x64.png" alt="">
+        <span class="brand-text">Designing for<br>Cal-GETC</span>
       </a>
-
-      <nav class="side-nav" aria-label="Faculty tools">
-        <a href="#" aria-current="page">
-          <span class="icon" aria-hidden="true">⌂</span>
-          <span>Home</span>
-        </a>
-        <a href="#areas">
-          <span class="icon" aria-hidden="true">▤</span>
-          <span>Find My Area</span>
-        </a>
-        <a href="#design">
-          <span class="icon" aria-hidden="true">▧</span>
-          <span>Design My Course</span>
-        </a>
-        <a href="#cor">
-          <span class="icon" aria-hidden="true">✓</span>
-          <span>Check My COR</span>
-        </a>
-        <a href="#standards">
-          <span class="icon" aria-hidden="true">☷</span>
-          <span>Understand the Standards</span>
-        </a>
-        <a href="#changes">
-          <span class="icon" aria-hidden="true">◁</span>
-          <span>See What Changed</span>
-        </a>
-        <a href="#faqs">
-          <span class="icon" aria-hidden="true">?</span>
-          <span>Gray Areas &amp; FAQs</span>
-        </a>
-      </nav>
-
-      <div class="side-quote">
-        “Clear policy leads to more equitable opportunity.”
-        <small>Faculty-centered course design</small>
+      <span class="audience-label">For CCC faculty</span>
+      <nav class="side-nav" aria-label="Faculty tools"><a href="index.html" aria-current="page"><span class="nav-icon" aria-hidden="true">⌂</span><span>Home</span></a><a href="find-my-area.html"><span class="nav-icon" aria-hidden="true">A</span><span>Find My Area</span></a><a href="design-my-course.html"><span class="nav-icon" aria-hidden="true">D</span><span>Design My Course</span></a><a href="check-my-cor.html"><span class="nav-icon" aria-hidden="true">✓</span><span>Check My COR</span></a><a href="standards.html"><span class="nav-icon" aria-hidden="true">§</span><span>Understand the Standards</span></a><a href="changes.html"><span class="nav-icon" aria-hidden="true">↺</span><span>See What Changed</span></a><a href="faqs.html"><span class="nav-icon" aria-hidden="true">?</span><span>Gray Areas & FAQs</span></a></nav>
+      <div class="side-meta">
+        <strong>Current standard: Version 1.4</strong>
+        <p>Use the official statewide sources for final curriculum and articulation decisions.</p>
+        <p><a href="sources.html">View source library</a></p>
       </div>
     </aside>
-
     <div class="main-column">
-      <header class="topbar">
-        <nav class="top-nav" aria-label="Secondary navigation">
-          <a href="#" aria-current="page">Home</a>
-          <a href="#standards">Guidance</a>
-          <a href="#areas">Resources</a>
-          <a href="#changes">Changes</a>
-          <a href="#faqs">FAQs</a>
-          <a href="#about">About</a>
-        </nav>
-
-        <a class="search-link" href="#search" aria-label="Search the site">⌕</a>
-      </header>
-
+      <div class="utility-bar">
+      <div class="utility-copy"><strong>Faculty course-design guide</strong> · not a student transfer planner</div>
+      <nav class="utility-links" aria-label="Utility navigation">
+        <a href="sources.html">Sources</a>
+        <a href="about.html">About</a>
+        <a class="external-link keep-mobile" href="https://icas-ca.org/standards-policies-and-procedures-manual/">Official Cal-GETC</a>
+      </nav>
+    </div>
+      <details class="mobile-nav">
+      <summary><span>Designing for Cal-GETC</span></summary>
+      <nav class="mobile-links" aria-label="Mobile navigation"><a href="index.html" aria-current="page">Home</a><a href="find-my-area.html">Find My Area</a><a href="design-my-course.html">Design My Course</a><a href="check-my-cor.html">Check My COR</a><a href="standards.html">Understand the Standards</a><a href="changes.html">See What Changed</a><a href="faqs.html">Gray Areas & FAQs</a></nav>
+    </details>
       <main id="main-content">
-        <section class="hero" aria-labelledby="page-title">
-          <div>
-            <p class="eyebrow">Same standards. A clearer guide.</p>
-            <h1 id="page-title">Designing for<br>Cal-GETC</h1>
-            <div class="gold-stroke" aria-hidden="true"></div>
-
-            <p class="hero-copy">
-              A plain-language guide for California Community College faculty
-              designing and revising courses.
-            </p>
-
-            <div class="hero-actions">
-              <a class="button button-primary" href="#areas">Explore the Guide →</a>
-              <a class="button button-secondary" href="#changes">See What Changed</a>
-            </div>
-          </div>
-
-          <div class="editorial-note" aria-label="Policy translated for your classroom">
-            <p>Policy,<br>translated<br>for your<br>classroom.</p>
-            <div class="note-stroke" aria-hidden="true"></div>
-            <div class="campus-illustration" aria-hidden="true"></div>
-          </div>
-        </section>
-
-        <section class="task-section" aria-labelledby="help-heading">
-          <h2 id="help-heading">How can we help you today?</h2>
-
-          <div class="task-grid">
-            <a class="task-card" id="areas" href="#">
-              <span class="card-icon" aria-hidden="true">▤</span>
-              <h3>Find My Area</h3>
-              <p>Explore Cal-GETC subject areas and course requirements.</p>
-              <span class="arrow" aria-hidden="true">→</span>
-            </a>
-
-            <a class="task-card" id="design" href="#">
-              <span class="card-icon" aria-hidden="true">▧</span>
-              <h3>Design My Course</h3>
-              <p>Move from standards and outcomes to a stronger course outline.</p>
-              <span class="arrow" aria-hidden="true">→</span>
-            </a>
-
-            <a class="task-card" id="cor" href="#">
-              <span class="card-icon" aria-hidden="true">✓</span>
-              <h3>Check My COR</h3>
-              <p>Use a faculty-friendly checklist before submission or revision.</p>
-              <span class="arrow" aria-hidden="true">→</span>
-            </a>
-
-            <a class="task-card" id="standards" href="#">
-              <span class="card-icon" aria-hidden="true">☷</span>
-              <h3>Understand the Standards</h3>
-              <p>Read plain-language explanations, examples, and source language.</p>
-              <span class="arrow" aria-hidden="true">→</span>
-            </a>
-
-            <a class="task-card" id="changes" href="#">
-              <span class="card-icon" aria-hidden="true">◁</span>
-              <h3>See What Changed</h3>
-              <p>Track recent revisions and what they mean for faculty course design.</p>
-              <span class="arrow" aria-hidden="true">→</span>
-            </a>
-
-            <a class="task-card" id="faqs" href="#">
-              <span class="card-icon" aria-hidden="true">?</span>
-              <h3>Gray Areas &amp; FAQs</h3>
-              <p>Work through questions where policy and practice need interpretation.</p>
-              <span class="arrow" aria-hidden="true">→</span>
-            </a>
-          </div>
-        </section>
-
-        <section class="landscape-band" aria-labelledby="better-design">
-          <h2 id="better-design">Better course design.<br>A stronger California.</h2>
-          <p>Equitable transfer starts with clearer faculty guidance.</p>
-        </section>
-      </main>
-
-      <footer id="about">
-        <div class="footer-brand">Designing for Cal-GETC</div>
-        <nav class="footer-links" aria-label="Footer navigation">
-          <a href="#">Contact</a>
-          <a href="#">Accessibility</a>
-          <a href="#">Privacy</a>
-          <a href="#">Sources</a>
-        </nav>
-      </footer>
+<section class="hero" aria-labelledby="page-title">
+  <div class="hero-text">
+    <div class="version-row">
+      <a class="version-badge" href="changes.html">Current statewide standard: Cal-GETC 1.4</a>
+      <span class="faculty-only">Built for faculty course designers</span>
+    </div>
+    <p class="kicker">Same standards. A clearer guide.</p>
+    <h1 id="page-title">Designing for<br>Cal-GETC</h1>
+    <div class="gold-stroke" aria-hidden="true"></div>
+    <p class="hero-copy">A plain-language guide for California Community College faculty designing, revising, and reviewing courses for Cal-GETC.</p>
+    <p class="hero-subcopy">Find the rule, see what reviewers look for, and connect the standard to what actually needs to appear in your course outline.</p>
+    <div class="hero-actions">
+      <a class="button button-primary" href="find-my-area.html">Find My Area →</a>
+      <a class="button button-secondary" href="changes.html">See What Changed</a>
     </div>
   </div>
-</body>
-</html>
+  <div class="hero-art" aria-hidden="true">
+    <div class="policy-note"><p>Policy,<br>translated for<br>course design.</p><div class="small-stroke"></div></div>
+    <img class="hero-mountains" src="decorative/california-mountains-corner-900x500.png" alt="">
+  </div>
+</section>
+
+<div class="orientation-strip">
+  <div class="orientation-inner">
+    <span class="orientation-title">New here?</span>
+    <p>Start with your Cal-GETC area. Revising an existing course? Check recent changes before you edit the COR.</p>
+    <a href="find-my-area.html">Start with the areas →</a>
+  </div>
+</div>
+
+<section class="section" aria-labelledby="workflow-heading">
+  <div class="content-wrap">
+    <div class="section-heading">
+      <p class="eyebrow">A practical sequence</p>
+      <h2 id="workflow-heading">Start with the work you are actually doing.</h2>
+      <p>The homepage now gives the three most common faculty tasks priority instead of making every resource look equally important.</p>
+    </div>
+    <div class="workflow-grid">
+      <a class="workflow-card" href="find-my-area.html">
+        <span class="step-number" aria-hidden="true">1</span>
+        <h3>Find My Area</h3>
+        <p>Identify the Cal-GETC area and the statewide criteria that apply to the course you are designing or revising.</p>
+        <span class="card-link">Choose an area →</span>
+      </a>
+      <a class="workflow-card" href="design-my-course.html">
+        <span class="step-number" aria-hidden="true">2</span>
+        <h3>Design My Course</h3>
+        <p>Translate the standard into objectives, content, assignments, evaluation, readings, and other parts of the COR.</p>
+        <span class="card-link">Build from the standard →</span>
+      </a>
+      <a class="workflow-card" href="check-my-cor.html">
+        <span class="step-number" aria-hidden="true">3</span>
+        <h3>Check My COR</h3>
+        <p>Look at the outline the way a reviewer will: can the required rigor and disciplinary focus actually be seen?</p>
+        <span class="card-link">Run a faculty check →</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<section class="section section-soft" aria-labelledby="support-heading">
+  <div class="content-wrap">
+    <div class="section-heading">
+      <p class="eyebrow">When you need the details</p>
+      <h2 id="support-heading">Understand the rule behind the decision.</h2>
+    </div>
+    <div class="resource-grid">
+      <a class="resource-card" href="standards.html"><span class="resource-icon" aria-hidden="true">§</span><span><h3>Understand the Standards</h3><p>Plain-language explanations with the official source kept close by.</p></span></a>
+      <a class="resource-card" href="changes.html"><span class="resource-icon" aria-hidden="true">↺</span><span><h3>See What Changed</h3><p>Track current language, prior language, and why a revision matters for design.</p></span></a>
+      <a class="resource-card" href="faqs.html"><span class="resource-icon" aria-hidden="true">?</span><span><h3>Gray Areas &amp; FAQs</h3><p>Separate what the state clearly says from what still requires faculty judgment.</p></span></a>
+    </div>
+  </div>
+</section>
+
+<section class="section" aria-labelledby="source-first-heading">
+  <div class="content-wrap">
+    <div class="source-first">
+      <div>
+        <p class="kicker">Source-first by design</p>
+        <h2 id="source-first-heading">Translation without pretending the policy says more than it does.</h2>
+        <p>Each substantive page will distinguish the statewide requirement, reviewer guidance, and our plain-language faculty interpretation. Gray areas stay labeled as gray areas.</p>
+        <p><a href="sources.html"><strong>See the source hierarchy →</strong></a></p>
+      </div>
+      <div class="source-legend" aria-label="Source label examples">
+        <div class="source-chip"><strong>Official Standard</strong><span>What Cal-GETC actually requires.</span></div>
+        <div class="source-chip"><strong>Reviewer Guidance</strong><span>What CSU/UC reviewers are told to look for.</span></div>
+        <div class="source-chip"><strong>Faculty Design Note</strong><span>Plain-language application or a clearly labeled interpretation.</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="mountain-band" aria-labelledby="mountain-heading">
+  <div class="mountain-content">
+    <h2 id="mountain-heading">Better course design.<br>A clearer path through Cal-GETC.</h2>
+    <p>Use the guide to understand the statewide standard, then work with your local curriculum and articulation processes for approval.</p>
+  </div>
+</section>
+</main><footer class="site-footer">
+      <div class="footer-inner">
+        <div>
+          <div class="footer-brand">Designing for Cal-GETC</div>
+          <div class="footer-meta">Independent faculty-facing guide · Current framework: Cal-GETC Version 1.4</div>
+        </div>
+        <nav class="footer-links" aria-label="Footer navigation">
+          <a href="sources.html">Sources</a>
+          <a href="about.html">About</a>
+          <a href="accessibility.html">Accessibility</a>
+        </nav>
+      </div>
+    </footer></div></div></body></html>
