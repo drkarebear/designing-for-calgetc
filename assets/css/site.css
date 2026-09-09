@@ -86,8 +86,15 @@ img { max-width: 100%; }
 .side-nav a:hover { background:#f7f3fb; }
 .side-nav a[aria-current='page'] { background:var(--lavender); color:var(--purple-dark); }
 .nav-icon {
-  width:25px; height:25px; border:1.5px solid currentColor; border-radius:7px;
-  display:inline-flex; align-items:center; justify-content:center; font-size:.78rem; font-weight:900;
+  width:28px; height:28px;
+  display:inline-flex; align-items:center; justify-content:center;
+  border:0; border-radius:8px;
+  background:rgba(74,39,125,.07);
+  font-size:1.05rem; line-height:1;
+  font-family:"Apple Color Emoji","Segoe UI Emoji","Noto Color Emoji",sans-serif;
+}
+.side-nav a[aria-current='page'] .nav-icon {
+  background:rgba(74,39,125,.12);
 }
 .side-meta { margin-top:auto; padding-top:18px; border-top:1px solid var(--line); }
 .side-meta strong { display:block; color:var(--navy); font-size:.85rem; }
@@ -1033,4 +1040,204 @@ fieldset.check-group { min-inline-size:0; padding:0; }
 }
 @media (max-width: 720px) {
   .trust-link { margin-left: 0; }
+}
+
+
+/* V13: spacing and choice-group clarity */
+
+/* Areas directory notice: sentence + action, not three competing inline chunks. */
+.area-filter-note {
+  display:grid;
+  grid-template-columns:minmax(0,1fr) auto;
+  gap:18px 24px;
+  align-items:center;
+  padding:18px 20px;
+}
+.area-filter-copy {
+  display:grid;
+  gap:5px;
+  min-width:0;
+}
+.area-filter-copy strong {
+  color:var(--navy);
+  font-size:.96rem;
+}
+.area-filter-copy span {
+  color:var(--muted);
+  line-height:1.5;
+}
+.area-filter-cta {
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  min-height:44px;
+  padding:8px 12px;
+  border:1px solid var(--line-strong);
+  border-radius:9px;
+  background:#fff;
+  color:var(--navy);
+  white-space:nowrap;
+  text-decoration:none;
+  font-weight:850;
+}
+.area-filter-cta:hover {
+  background:var(--blue-soft);
+}
+
+/* Give the directory cards a little more air. */
+.area-overview-grid {
+  gap:22px;
+}
+.area-overview-card {
+  padding:24px;
+}
+.area-overview-card h2 {
+  line-height:1.18;
+}
+.area-overview-card > p {
+  line-height:1.55;
+  margin-bottom:16px;
+}
+.area-group-card .group-open-link {
+  display:inline-flex;
+  align-items:center;
+  min-height:44px;
+  margin:2px 0 3px;
+  padding:4px 0;
+}
+
+/* Subarea choices are now a semantic list of distinct rows. */
+.subarea-links {
+  display:block;
+  margin-top:16px;
+  padding-top:16px;
+  border-top:1px solid var(--line);
+}
+.subarea-direct-label {
+  width:auto;
+  margin:0;
+  color:var(--muted);
+  font-size:.84rem;
+  font-weight:850;
+}
+.subarea-link-list {
+  list-style:none;
+  margin:10px 0 0;
+  padding:0;
+  display:grid;
+  gap:8px;
+}
+.subarea-link-list li {
+  margin:0;
+  padding:0;
+}
+.subarea-link-list a {
+  width:100%;
+  min-height:50px;
+  display:grid;
+  grid-template-columns:38px minmax(0,1fr) auto;
+  gap:10px;
+  align-items:center;
+  padding:8px 11px;
+  border:1px solid var(--line-strong);
+  border-radius:10px;
+  background:#fbfcfe;
+  color:var(--navy);
+  text-decoration:none;
+}
+.subarea-link-list a:hover {
+  background:var(--purple-soft);
+  border-color:#b8a7cc;
+}
+.subarea-link-code {
+  width:34px;
+  min-height:32px;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  border-radius:8px;
+  background:var(--lavender);
+  color:var(--purple);
+  font-weight:900;
+}
+.subarea-link-name {
+  color:var(--navy);
+  font-weight:800;
+  line-height:1.3;
+}
+.subarea-arrow {
+  color:var(--purple);
+  font-weight:900;
+}
+
+/* Overview-page subarea CTAs carry names, not just codes. */
+.group-cta {
+  width:100%;
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+  gap:10px;
+  justify-content:stretch;
+}
+.group-cta .group-cta-button {
+  min-height:48px;
+  white-space:normal;
+  text-align:center;
+  line-height:1.25;
+}
+
+/* Homepage source key wraps as a deliberate badge group. */
+.trust-strip {
+  display:grid;
+  grid-template-columns:auto minmax(0,1fr) auto;
+  gap:12px 18px;
+  align-items:center;
+}
+.trust-strip > strong {
+  margin-right:0;
+}
+.trust-pills {
+  display:flex;
+  flex-wrap:wrap;
+  gap:9px;
+  min-width:0;
+}
+.trust-strip .trust-link {
+  margin-left:0;
+  white-space:nowrap;
+}
+
+/* Avoid overly tight action clusters in the few remaining two-button groups. */
+.checker-next-actions {
+  gap:12px;
+}
+.hero-actions {
+  gap:14px;
+}
+
+@media (max-width:900px) {
+  .area-filter-note {
+    grid-template-columns:1fr;
+  }
+  .area-filter-cta {
+    justify-self:start;
+  }
+  .trust-strip {
+    grid-template-columns:1fr;
+    align-items:start;
+  }
+  .trust-strip .trust-link {
+    white-space:normal;
+  }
+}
+
+@media (max-width:720px) {
+  .area-overview-card {
+    padding:20px;
+  }
+  .subarea-link-list a {
+    grid-template-columns:38px minmax(0,1fr) auto;
+  }
+  .group-cta {
+    grid-template-columns:1fr;
+  }
 }

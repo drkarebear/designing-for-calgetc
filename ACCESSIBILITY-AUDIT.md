@@ -106,3 +106,11 @@ Changes include:
 - shortened very large headings at <=420 CSS px to reduce magnification/reflow burden.
 
 Responsive CSS was reviewed at the 640 CSS-pixel and 320 CSS-pixel breakpoints used as practical equivalents for high-zoom/reflow testing. This source-based review does not replace final manual browser zoom and assistive-technology testing.
+
+
+## September 2026 follow-up: density and link-group clarity
+A later usability pass addressed clustered adjacent links and controls that were technically operable
+but visually cramped. The Areas directory now presents subarea navigation as semantic lists of
+full-width, named choices rather than adjacent inline links. Group overview calls to action also
+include the subarea names rather than relying on codes alone. This improves recognition, zoom/reflow
+behavior, target separation, and graceful rendering if styles fail to load.
